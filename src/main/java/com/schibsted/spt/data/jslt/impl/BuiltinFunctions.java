@@ -611,7 +611,7 @@ public class BuiltinFunctions {
         JsonNode value = obj.get(key);
         if (value == null) {
           if (arguments.length == 2)
-            return NullNode.instance;
+            throw new JsltException("Cannot 'get-key' '" + key + "' in input " + input.toString() + ". Not found.");
           else
             return arguments[2]; // fallback argument
         } else

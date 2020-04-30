@@ -45,7 +45,7 @@ public class ArraySlicer extends AbstractNode {
   public JsonNode apply(Scope scope, JsonNode input) {
     JsonNode sequence = parent.apply(scope, input);
     if (!sequence.isArray() && !sequence.isTextual())
-      return NullNode.instance;
+      throw new JsltException("Cannot select index from " + sequence.toString() + " of type " + sequence.getNodeType() + ". Must be a STRING or ARRAY", this.getLocation());
 
     int size = sequence.size();
     if (sequence.isTextual())
@@ -56,7 +56,7 @@ public class ArraySlicer extends AbstractNode {
       if (sequence.isArray()) {
         JsonNode val = sequence.get(leftix);
         if (val == null)
-          val = NullNode.instance;
+          throw new JsltException("Cannot find index " + leftix + " of array " + sequence.toString(), this.getLocation());
         return val;
       } else {
         String string = sequence.asText();

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Collections;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.NullNode;
+import com.schibsted.spt.data.jslt.JsltException;
 
 public class DotExpression extends AbstractNode {
   private String key;
@@ -46,7 +47,7 @@ public class DotExpression extends AbstractNode {
     // okay, do the keying
     JsonNode value = input.get(key);
     if (value == null)
-      value = NullNode.instance;
+      throw new JsltException("Key '" + toString() + "' not found in " + input.toString(), location);
     return value;
   }
 

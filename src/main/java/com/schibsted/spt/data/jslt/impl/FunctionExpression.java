@@ -59,7 +59,7 @@ public class FunctionExpression extends AbstractInvocationExpression {
       // turn it into a JSON null. (the alternative is to throw an
       // exception.)
       if (value == null)
-        value = NullNode.instance;
+        throw new JsltException("Cannot find function " + this.toString(), this.getLocation());
 
       return value;
     }

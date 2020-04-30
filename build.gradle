@@ -231,3 +231,7 @@ test {
     showStandardStreams = true
   }
 }
+
+wrapper {
+    gradleVersion = '4.0'
+}
